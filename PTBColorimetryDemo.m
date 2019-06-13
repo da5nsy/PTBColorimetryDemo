@@ -3,10 +3,34 @@
 % Gives a demo of some of the datasets and computations available within
 % PTB to do colorimetry.
 
+% Additional goal: Provide a standard MATLAB implementation of CIE
+% colorimetry to make sure that when researchers say they're computing X
+% there's a slightly better chance it's comparable across studies.
+
 % See also:
 % - RenderDemo.m
 % - DKLDemo.m
 % - PsychColorimetricData/PsychColorimetricMatFiles/Contents.m
+
+% Also: (Recommendation from DB, not gone through yet)
+
+% PsychDemos/CalDemo
+% PsychDemos/IsomerizationsInDishDemo
+% PsychDemos/IsomerizationsInEyeDemo
+% PsychDemos/NomogramDemo
+% PsychTests/CIEConeFundamentalsTest
+% PsychTests/CIEXYZPhysTest
+% PsychTests/CIEConeFundamentalsFieldSizeTest
+% PsychTests/OSAUCSTest
+% PsychTests/TrolandTest
+% PsychColorimetric/PsychMunsell/MunsellTest
+% PsychRadiometric/RadiometricConversionsTest
+% https://github.com/BrainardLab/TeachingCode :
+% - MatlabTutorials/calibrationTutorial
+% - MatlabTutorials/colorSpaceExample
+% - MatlabTutorials/colorTransformAssignment
+% - MatlabTutorials/silentSubstitutionTutorial
+% Various in isetbio
 
 % TO DO:
 % - Improve intro
@@ -14,6 +38,8 @@
 % - u'v' space
 % - MB space
 % - Colour constancy (?)
+% - Reference CIE docs
+% - Refer to Westland toolbox
 
 clc, clear, close all
 
@@ -34,6 +60,8 @@ load sur_vrhel
 % CIE 1931 observer:
 % https://en.wikipedia.org/wiki/CIE_1931_color_space
 load T_xyz1931
+
+% These are just examples of many options, see PsychColorimetricData/PsychColorimetricMatFiles/Contents.m
 
 %% Interpolate values to match
 % Both S_D65 and S_xyz1931 have range/intervals of [380,5,81], so we'll
