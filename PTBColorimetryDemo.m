@@ -56,7 +56,7 @@ load spd_D65
 % Vrhel, M.J., Gershon, R. and Iwan, L.S., 1994. Measurement and Analysis of Object Reflectance Spectra. Color Research & Application, 19(1), pp.4–9.
 load sur_vrhel
 
-% Observer - aka Spectral Sensitivity Function (SSF)
+% Observer - aka Colour Matching Function (CMF) (aka Spectral Sensitivity Function, when it is biologically plausible)
 % CIE 1931 observer:
 % https://en.wikipedia.org/wiki/CIE_1931_color_space
 load T_xyz1931
