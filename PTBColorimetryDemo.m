@@ -138,18 +138,53 @@ scatter(upvp(1,:),upvp(2,:),'kv')
 xlabel('u''') %to get an apostrophe you throw extra apostrophes at it until it behaves
 ylabel('v''')
 
-%% - %%
-
-% That's the basic stuff.
-% Now let's break out some of the fancier stuff...
-
-%% Calculate CIELAB values
+%% CIELAB
 
 whiteXYZ = T_xyz1931*spd_D65;
 Lab = XYZToLab(XYZ,whiteXYZ);
 
 figure, 
-scatter3(Lab(2,:),Lab(3,:),Lab(1,:)) 
+scatter3(Lab(2,:),Lab(3,:),Lab(1,:),'kv') 
+xlabel('a*')
+ylabel('b*')
+zlabel('L*')
+
+%% CIELUV
+
+whiteXYZ = T_xyz1931*spd_D65;
+Luv = XYZToLuv(XYZ,whiteXYZ);
+
+figure, 
+scatter3(Luv(2,:),Luv(3,:),Luv(1,:),'kv') 
+xlabel('u*')
+ylabel('y*')
+zlabel('L*')
+
+%% MB
+load T_cones_ss2.mat
+load T_CIE_Y2.mat
+%plot(SToWls(S_cones_ss2),T_cones_ss2)
+
+T_c = SplineCmf(S_cones_ss2,T_cones_ss2,S_xyz1931); %resampling so that I can use the old sRGBs that I already calculated, and keep the appearance comparable accross diagrams
+T_C = SplineCmf(S_CIE_Y2,T_CIE_Y2,S_xyz1931);
+spectralLocus_MB = LMSToMacBoyn(T_c,T_c,T_C);
+
+LMS = T_c*colourSignals;
+ls = LMSToMacBoyn(LMS,T_c,T_C);
+
+figure, hold on
+scatter(spectralLocus_MB(1,:),spectralLocus_MB(2,:),[],sRGBSpectralLocus','filled')
+scatter(ls(1,:),ls(2,:),'kv')
+xlabel('{\itl}_{MB}');
+ylabel('{\its}_{MB}');
+
+
+%% - %%
+
+% That's the basic stuff.
+% Now let's break out some of the fancier stuff...
+
+
 
 %% Calculate the Correlated Colour Temperature of an illuminant
 SPDToCCT(spd_D65,S_D65)
